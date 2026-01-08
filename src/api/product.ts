@@ -1,7 +1,8 @@
-import type { Product } from "../types/product";
+import type { ApiRequest, ApiResponse, Product } from "../types/product";
 import apiClient from "./client";
 
-export async function getProducts() {
-  const products = apiClient<Product[]>("/listings");
-  return products;
+export async function getProducts(payload: ApiRequest): Promise<Product[]> {
+  const response = await apiClient<ApiResponse>(payload);
+
+  return response.products;
 }

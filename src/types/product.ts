@@ -1,7 +1,22 @@
+export interface ApiRequest {
+  query: string;
+  pageNumber: number;
+  size: number;
+  additionalPages: number;
+  sort: number;
+  facets?: Record<
+    string,
+    Array<{
+      identifier: string;
+      value: string | { gte: number; lte: number } | boolean;
+    }>
+  >;
+}
+
 export type ApiResponse = {
   pagination: string;
   facets: Facet[];
-  results: Product[];
+  products: Product[];
 };
 
 export type Product = {
