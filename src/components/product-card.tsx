@@ -75,11 +75,19 @@ function ProductImage({ product }: { product: Product }) {
 }
 
 function ProductPrice({ price }: { price: ProductPrice }) {
+  const isPromotion = price.isOnPromotion;
+
   return (
     <>
       <div className="flex gap-2 items-center">
-        <p className="font-bold text-red-500">£{price.priceIncTax}</p>
-        <p className="text-gray-500 line-through">£{price.wasPriceIncTax}</p>
+        <p
+          className={`font-bold ${isPromotion ? "text-red-500" : "text-black"}`}
+        >
+          £{price.priceIncTax}
+        </p>
+        {isPromotion && (
+          <p className="text-gray-500 line-through">£{price.wasPriceIncTax}</p>
+        )}
       </div>
     </>
   );
