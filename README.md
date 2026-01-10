@@ -26,3 +26,7 @@ src/
 ├── App.tsx         # Root UI composition
 └── main.tsx        # Application entry point
 ```
+
+## Wireframe designs
+
+![wireframe for product card](/design/product-card.png)
