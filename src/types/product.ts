@@ -52,6 +52,7 @@ export type ProductImage = {
 
 export type ProductStockStatus = {
   status: string;
+  stockLevel?: number;
 };
 
 export type ProductPrice = {

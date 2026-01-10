@@ -1,3 +1,4 @@
+import ProductCard from "./components/product-card";
 import { useProduct } from "./hooks/useProduct";
 
 function App() {
@@ -11,14 +12,14 @@ function App() {
     return <div>Error loading products</div>;
   }
 
+  if (!products) {
+    return <div>No products found</div>;
+  }
+
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Showers for sale</h1>;
-      <ul>
-        {products?.map((product) => {
-          return <li key={product.id}>{product.productName}</li>;
-        })}
-      </ul>
+      <h1 className="text-3xl font-bold underline">Showers for sale</h1>
+      <ProductCard products={products} />
     </>
   );
 }
