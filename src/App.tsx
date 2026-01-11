@@ -38,7 +38,9 @@ function App() {
 
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Showers for sale</h1>
+      <h1 tabIndex={0} className="text-3xl font-bold underline">
+        Showers for sale
+      </h1>
 
       <ResultsCount pagination={pagination} />
 

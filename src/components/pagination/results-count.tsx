@@ -4,9 +4,9 @@ function ResultsCount({ pagination }: { pagination: Pagination | null }) {
   if (!pagination) return null;
 
   return (
-    <p>
+    <span tabIndex={0} className="font-bold">
       {pagination.size} of {pagination.total} results
-    </p>
+    </span>
   );
 }
 export default ResultsCount;

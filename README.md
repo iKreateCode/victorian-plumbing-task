@@ -27,6 +27,13 @@ src/
 └── main.tsx        # Application entry point
 ```
 
+## Features
+
+- URL source of truth
+- Unnecessary previous product card rendering
+- Accessibility
+- Responsive
+
 ## Wireframe designs
 
 ![wireframe for product card](/design/product-card.png)
