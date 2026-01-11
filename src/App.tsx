@@ -2,27 +2,27 @@ import { useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useProduct } from "./hooks/useProduct";
 import ProductList from "./components/product/product-list";
-import ResultsCount from "./components/pagination/results-count";
+import ResultsCount from "./components/results-count/results-count";
+import SortDropdown from "./components/sort-dropdown/sort-dropdown";
+import useUpdateSearchParams from "./hooks/useUpdateSearchParams";
 
 function App() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
+  const updateParam = useUpdateSearchParams();
 
   const page = Number(searchParams.get("page")) || 0;
+  const sort = Number(searchParams.get("sort")) || 1;
 
   const { products, pagination, loading, error, hasMore } = useProduct({
     query: "showers",
     page,
+    sort,
   });
 
   const loadMore = useCallback(() => {
     if (loading || !hasMore) return;
-
-    setSearchParams((prev) => {
-      const next = new URLSearchParams(prev);
-      next.set("page", String(page + 1));
-      return next;
-    });
-  }, [loading, hasMore, page, setSearchParams]);
+    updateParam("page", page + 1);
+  }, [loading, hasMore, page, updateParam]);
 
   if (loading && page === 0) {
     return <div>Loading...</div>;
@@ -42,7 +42,10 @@ function App() {
         Showers for sale
       </h1>
 
-      <ResultsCount pagination={pagination} />
+      <div className="flex justify-between items-center my-4">
+        <ResultsCount pagination={pagination} />
+        <SortDropdown />
+      </div>
 
       <ProductList products={products} />
 

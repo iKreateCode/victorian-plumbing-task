@@ -2,7 +2,15 @@ import { useEffect, useState } from "react";
 import type { Pagination, Product } from "../types/product";
 import { getProducts } from "../api/product";
 
-export function useProduct({ query, page }: { query: string; page: number }) {
+export function useProduct({
+  query,
+  page,
+  sort,
+}: {
+  query: string;
+  page: number;
+  sort: number;
+}) {
   const SIZE = 32;
 
   const [products, setProducts] = useState<Product[]>([]);
@@ -16,7 +24,7 @@ export function useProduct({ query, page }: { query: string; page: number }) {
     pageNumber: 0,
     size: SIZE,
     additionalPages: page,
-    sort: 1,
+    sort: sort,
   };
 
   useEffect(() => {
@@ -42,7 +50,7 @@ export function useProduct({ query, page }: { query: string; page: number }) {
           setLoading(false);
         }
       });
-  }, [query, page]);
+  }, [query, page, sort]);
 
   return { products, pagination, loading, error, hasMore };
 }

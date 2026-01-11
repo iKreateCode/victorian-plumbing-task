@@ -50,7 +50,7 @@ function ProductBrandAndRating({ product }: { product: Product }) {
       ) : (
         product.brand.name
       )}
-      {product.reviewsCount && (
+      {product.reviewsCount > 0 && (
         <div tabIndex={0} className="flex flex-row gap-1">
           {product.averageRating}
           <Star fill="orange" strokeWidth={0} />({product.reviewsCount})
@@ -116,7 +116,7 @@ function ProductStockStatus({
     case "D":
       return (
         <span tabIndex={0} className="text-yellow-600 font-semibold">
-          `${stockStatus.stockLevel} Left in Stock`
+          {stockStatus.stockLevel} Left in Stock
         </span>
       );
     case "A":
@@ -136,12 +136,13 @@ function ProductStockStatus({
   }
 }
 
-function ProductCard({ product }: { product: Product }) {
+function ProductCard({ product, index }: { product: Product; index: number }) {
   return (
     <div
       tabIndex={0}
       key={product.id}
       className="border border-gray-200 p-4 space-y-2"
+      aria-label={`Product ${index + 1}`}
     >
       <ProductImage product={product} />
       <ProductBrandAndRating product={product} />
