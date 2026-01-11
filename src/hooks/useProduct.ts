@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
-import type { Product } from "../types/product";
+import type { Pagination, Product } from "../types/product";
 import { getProducts } from "../api/product";
 
-export function useProduct(query: string = "showers") {
-  const [products, setProducts] = useState<Product[] | null>(null);
+export function useProduct({ query, page }: { query: string; page: number }) {
+  const SIZE = 32;
+
+  const [products, setProducts] = useState<Product[]>([]);
+  const [pagination, setPagination] = useState<Pagination | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [hasMore, setHasMore] = useState<boolean>(true);
 
   const payload = {
     query,
     pageNumber: 0,
-    size: 32,
-    additionalPages: 0,
+    size: SIZE,
+    additionalPages: page,
     sort: 1,
   };
 
@@ -19,11 +23,13 @@ export function useProduct(query: string = "showers") {
     let isMounted = true;
     setLoading(true);
     setError(null);
-
     getProducts(payload)
       .then((data) => {
         if (isMounted) {
-          setProducts(data);
+          setProducts(data.products);
+          setHasMore(data.products.length === SIZE * (page + 1));
+
+          setPagination(data.pagination);
         }
       })
       .catch((error) => {
@@ -36,7 +42,7 @@ export function useProduct(query: string = "showers") {
           setLoading(false);
         }
       });
-  }, [query]);
+  }, [query, page]);
 
-  return { products, loading, error };
+  return { products, pagination, loading, error, hasMore };
 }

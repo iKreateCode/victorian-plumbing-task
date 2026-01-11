@@ -4,7 +4,8 @@ import type {
   ProductAttributes,
   ProductPrice,
   ProductStockStatus,
-} from "../types/product";
+} from "../../types/product";
+import React from "react";
 
 function ProductPill({ text }: { text: string }) {
   const isSale = text === "SALE";
@@ -126,26 +127,17 @@ function ProductStockStatus({
   }
 }
 
-function ProductCard({ products }: { products: Product[] }) {
+function ProductCard({ product }: { product: Product }) {
   return (
-    <>
-      <div className="grid grid-cols-4 gap-4 rounded-2xl">
-        {products.map((product) => (
-          <div
-            key={product.id}
-            className="border border-gray-200 p-4 space-y-2"
-          >
-            <ProductImage product={product} />
-            <ProductBrandAndRating product={product} />
-            <h1>{product.productName}</h1>
-            <ProductAttributes attributes={product.attributes} />
-            <ProductPrice price={product.price} />
-            <ProductStockStatus stockStatus={product.stockStatus} />
-          </div>
-        ))}
-      </div>
-    </>
+    <div key={product.id} className="border border-gray-200 p-4 space-y-2">
+      <ProductImage product={product} />
+      <ProductBrandAndRating product={product} />
+      <h1>{product.productName}</h1>
+      <ProductAttributes attributes={product.attributes} />
+      <ProductPrice price={product.price} />
+      <ProductStockStatus stockStatus={product.stockStatus} />
+    </div>
   );
 }
 
-export default ProductCard;
+export default React.memo(ProductCard);

@@ -14,7 +14,7 @@ export interface ApiRequest {
 }
 
 export type ApiResponse = {
-  pagination: string;
+  pagination: Pagination;
   facets: Facet[];
   products: Product[];
 };
@@ -113,4 +113,11 @@ export type FacetOption = {
   displayValue: string;
   productCount: number;
   priority: number;
+};
+
+export type Pagination = {
+  from: number;
+  size: number;
+  total: number;
+  sortType: number;
 };
