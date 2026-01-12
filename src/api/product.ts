@@ -1,4 +1,4 @@
-import type { ApiRequest, ApiResponse, Product } from "../types/product";
+import type { ApiRequest, ApiResponse } from "../types/product";
 import apiClient from "./client";
 
 export async function getProducts(payload: ApiRequest): Promise<ApiResponse> {
