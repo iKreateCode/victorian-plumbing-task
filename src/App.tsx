@@ -37,32 +37,39 @@ function App() {
   }
 
   return (
-    <>
-      <h1 tabIndex={0} className="text-3xl font-bold underline">
-        Showers for sale
-      </h1>
-
-      <div className="flex justify-between items-center my-4">
-        <ResultsCount pagination={pagination} />
-        <SortDropdown />
+    <div className="flex flex-row gap-4">
+      <div className="bg-white max-w-1/6 w-full border border-gray-200 p-4">
+        <h1 tabIndex={0} className="text-3xl font-bold">
+          Filters
+        </h1>
       </div>
+      <div className="max-w-5/6 w-full">
+        <h1 tabIndex={0} className="text-3xl font-bold">
+          Showers for sale
+        </h1>
 
-      <ProductList products={products} />
-
-      {hasMore && (
-        <div className="flex flex-col items-center mt-4 gap-4">
+        <div className="flex justify-between items-center my-4">
           <ResultsCount pagination={pagination} />
-
-          <button
-            className="bg-sky-500 text-white px-4 py-2 rounded"
-            onClick={loadMore}
-            disabled={loading}
-          >
-            {loading ? "Loading..." : "Load more"}
-          </button>
+          <SortDropdown />
         </div>
-      )}
-    </>
+
+        <ProductList products={products} />
+
+        {hasMore && (
+          <div className="flex flex-col items-center mt-4 gap-4">
+            <ResultsCount pagination={pagination} />
+
+            <button
+              className="bg-sky-500 text-white px-4 py-2 rounded"
+              onClick={loadMore}
+              disabled={loading}
+            >
+              {loading ? "Loading..." : "Load more"}
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 

@@ -141,7 +141,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
     <div
       tabIndex={0}
       key={product.id}
-      className="border border-gray-200 p-4 space-y-2"
+      className="bg-white border border-gray-200 p-4 space-y-2"
       aria-label={`Product ${index + 1}`}
     >
       <ProductImage product={product} />

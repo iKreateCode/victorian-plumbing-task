@@ -9,7 +9,7 @@ function SortDropdown() {
   return (
     <select
       aria-label="Sort By"
-      className="border border-gray-300 p-2 rounded"
+      className="border bg-white border-gray-300 p-2 rounded"
       onChange={(e) => {
         updateParam("sort", e.target.value);
       }}
