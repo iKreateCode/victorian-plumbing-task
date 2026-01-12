@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { Pagination, Product } from "../types/product";
+import type { Facet, Pagination, Product } from "../types/product";
 import { getProducts } from "../api/product";
 
 export function useProduct({
@@ -15,6 +15,7 @@ export function useProduct({
 
   const [products, setProducts] = useState<Product[]>([]);
   const [pagination, setPagination] = useState<Pagination | null>(null);
+  const [facets, setFacets] = useState<Facet[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [hasMore, setHasMore] = useState<boolean>(true);
@@ -38,6 +39,8 @@ export function useProduct({
           setHasMore(data.products.length === SIZE * (page + 1));
 
           setPagination(data.pagination);
+
+          setFacets(data.facets);
         }
       })
       .catch((error) => {
@@ -52,5 +55,5 @@ export function useProduct({
       });
   }, [query, page, sort]);
 
-  return { products, pagination, loading, error, hasMore };
+  return { products, pagination, facets, loading, error, hasMore };
 }
