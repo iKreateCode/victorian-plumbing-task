@@ -37,3 +37,15 @@ src/
 ## Wireframe designs
 
 ![wireframe for product card](/design/product-card.png)
+
+## Improvements
+
+Given the limited time available for this take home task, I prioritised the core requirements over additional features. With more time, the following improvements would be next:
+
+- API caching
+- Filtering
+- Image lazy loading (performance)
+- Better error & loading pages
+- Product detail page
+- Dynamic SEO based on categories
+- Working test files (could not run jest due to errors)
